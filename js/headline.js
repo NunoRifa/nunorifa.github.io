@@ -60,7 +60,8 @@ $(document).ready(function($){
 					var wordWidth = $(this).width();
 				    if (wordWidth > width) width = wordWidth;
 				});
-				headline.find('.cd-words-wrapper').css('width', width);
+				// headline.find('.cd-words-wrapper').css('width', width);
+				headline.find('.cd-words-wrapper');
 			};
 
 			//trigger animation
