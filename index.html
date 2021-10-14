@@ -244,24 +244,28 @@
                 <!--Describtion ends!-->
                 <hr />
                 <!--about details-->
-                <ul class="list-inline about-info">
-                  <li>
-                    <span>Nama:</span>
-                    <p>Nuno Rigo Fadilah</p>
-                  </li>
-                  <li>
-                    <span>Umur:</span>
-                    <p id="umurSekarang"><br /></p>
-                  </li>
-                  <li>
-                    <span>Hobi:</span>
-                    <p>Touring bersama sahabat dan Bermain basket</p>
-                  </li>
-                  <li>
-                    <span>Alamat:</span>
-                    <p>Gang amal, Cipayung, Jakarta Timur</p>
-                  </li>
-                </ul>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="col">
+                      <span class="text-bold">Nama:</span>
+                      <p>Nuno Rigo Fadilah</p>
+                    </div>
+                    <div class="col">
+                      <span class="text-bold">Hobi:</span>
+                      <p>Touring bersama sahabat dan Bermain basket</p>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="col">
+                      <span class="text-bold">Umur:</span>
+                      <p><span id="umurSekarang"></span> Tahun pada bulan September</p>
+                    </div>
+                    <div class="col">
+                      <span class="text-bold">Alamat:</span>
+                      <p>Gang amal, Cipayung, Jakarta Timur</p>
+                    </div>
+                  </div>
+                </div>
                 <!--about details ends!-->
                 <!--buttons-->
                 <a
@@ -704,6 +708,5 @@
       let tahunSekarang = new Date().getFullYear();
       let umur = tahunSekarang - 2001;
       document.getElementById("umurSekarang").innerHTML = umur;
-      console.lo;
     </script>
 </html>
