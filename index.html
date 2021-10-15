@@ -258,7 +258,7 @@
                   <div class="col-6">
                     <div class="col">
                       <span class="text-bold">Umur:</span>
-                      <p><span id="umurSekarang"></span> Tahun pada bulan September</p>
+                      <p><span id="umurSekarang"></span> Tahun</p>
                     </div>
                     <div class="col">
                       <span class="text-bold">Alamat:</span>
@@ -705,8 +705,14 @@
     <script src="js/all.js"></script>
 
     <script>
-      let tahunSekarang = new Date().getFullYear();
-      let umur = tahunSekarang - 2001;
+      function calculate_age(dob) { 
+        let diff_ms = Date.now() - dob.getTime();
+        let age_dt = new Date(diff_ms); 
+      
+        return Math.abs(age_dt.getUTCFullYear() - 1970);
+      }
+
+      let umur = calculate_age(new Date(2001, 8, 22));
       document.getElementById("umurSekarang").innerHTML = umur;
     </script>
 </html>
