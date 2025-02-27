@@ -3,6 +3,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Profile Terminal</title>
+    <link rel="icon" type="image/x-icon" href="images/icon/kali-linux.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -12,8 +13,8 @@
     <style>
       body {
         background-image: url("images/kali-waves.png");
-        background-size: cover; /* Menggunakan cover agar gambar latar menyesuaikan */
-        background-position: center; /* Pusatkan gambar latar */
+        background-size: cover;
+        background-position: center;
         color: #fff;
         font-family: "Courier New", Courier, monospace;
       }
@@ -37,7 +38,7 @@
       @media (min-width: 1024px) {
         .terminal {
           width: 60%; /* Lebar untuk desktop */
-          max-width: 48rem; /* Batasi lebar maksimum */
+          max-width: 48rem;
         }
       }
       .terminal.visible {
@@ -182,7 +183,7 @@
               break;
             case "clear":
               clearTerminal();
-              return; // Skip printing the prompt after clearing
+              return;
             default:
               printOutput(`Command not found: ${command}`);
           }
