@@ -3,94 +3,14 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Profile Terminal</title>
-    <link rel="icon" type="image/x-icon" href="images/icon/kali-linux.png">
+    <link rel="icon" type="image/x-icon" href="images/icon/kali-linux.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-      body {
-        background-image: url("images/kali-waves.png");
-        background-size: cover;
-        background-position: center;
-        color: #fff;
-        font-family: "Courier New", Courier, monospace;
-      }
-      .terminal {
-        height: 80vh;
-        max-height: 80vh;
-        overflow-y: auto;
-        background-color: rgba(0, 0, 0, 0.8);
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-        width: 90%; /* Lebar default untuk mobile */
-        margin: 0 auto;
-      }
-      @media (min-width: 640px) {
-        .terminal {
-          width: 75%; /* Lebar untuk tablet */
-        }
-      }
-      @media (min-width: 1024px) {
-        .terminal {
-          width: 60%; /* Lebar untuk desktop */
-          max-width: 48rem;
-        }
-      }
-      .terminal.visible {
-        opacity: 1;
-      }
-      .terminal-users {
-        color: #27c93f;
-      }
-      .icon {
-        visibility: hidden;
-        cursor: pointer;
-      }
-      @media (min-width: 640px) {
-        .icon {
-          visibility: unset;
-          width: 50px; /* Ukuran untuk tablet dan desktop */
-          height: 50px;
-          margin: 35px 10px;
-        }
-      }
-      @media (min-width: 1024px) {
-        .icon:hover {
-          transition: ease-in-out 0.15s;
-          width: 60px; /* Ukuran hover untuk tablet dan desktop */
-          height: 60px;
-          margin: 35px 10px;
-        }
-      }
-      .terminal-header {
-        display: flex;
-        align-items: center;
-        background-color: #333;
-        padding: 5px 10px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-      }
-      .terminal-header .button {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        margin-right: 5px;
-      }
-      .button.red {
-        background-color: #ff5f56;
-      }
-      .button.yellow {
-        background-color: #ffbd2e;
-      }
-      .button.green {
-        background-color: #27c93f;
-      }
-    </style>
+    <link rel="stylesheet" href="index.css" />
   </head>
   <body class="flex items-center justify-center h-screen">
     <div class="absolute top-5 left-5">
@@ -119,123 +39,28 @@
         width="50"
       />
     </div>
-    <div class="terminal w-3/4 max-w-3xl mx-auto text-left" id="terminal">
+    <div class="terminal-init w-3/4 max-w-3xl mx-auto text-left">
       <div class="terminal-header">
         <div class="button red"></div>
         <div class="button yellow"></div>
         <div class="button green"></div>
       </div>
-      <div class="p-2">
-        <div id="output" class="p-2"></div>
-        <div class="flex p-2">
-          <span class="terminal-users mr-2"> user@portfolio:~$ </span>
-          <input
-            class="bg-transparent border-none outline-none flex-1"
-            id="command-input"
-            type="text"
-            autocomplete="false"
-            autofocus
-          />
+      <div class="terminal" id="terminal">
+        <div class="p-2">
+          <div id="output" class="p-2"></div>
+          <div class="flex p-2">
+            <span class="terminal-users mr-2"> user@portfolio:~$ </span>
+            <input
+              class="bg-transparent border-none outline-none flex-1"
+              id="command-input"
+              type="text"
+              autocomplete="false"
+              autofocus
+            />
+          </div>
         </div>
       </div>
     </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("terminal").addEventListener("click", () => {
-          document.getElementById("command-input").focus();
-        });
-
-        const terminal = document.getElementById("terminal");
-        setTimeout(() => {
-          terminal.classList.add("visible");
-          printHelp();
-        }, 500);
-
-        const commandInput = document.getElementById("command-input");
-        const output = document.getElementById("output");
-
-        commandInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            const command = commandInput.value.trim();
-            commandInput.value = "";
-            handleCommand(command);
-          }
-        });
-
-        function handleCommand(command) {
-          printOutput(
-            `<span class="terminal-users mr-2">user@portfolio:~$</span> ${command}`
-          );
-          switch (command) {
-            case "about":
-              printOutput(
-                "This is the about section. Here you can write about yourself."
-              );
-              break;
-            case "skills":
-              printOutput("These are my skills. List your skills here.");
-              break;
-            case "portfolio":
-              printOutput("This is my portfolio. Showcase your work here.");
-              break;
-            case "--help":
-              printHelp();
-              break;
-            case "clear":
-              clearTerminal();
-              return;
-            default:
-              printOutput(`Command not found: ${command}`);
-          }
-          printPrompt();
-        }
-
-        function printOutput(text) {
-          const newLine = document.createElement("div");
-          newLine.innerHTML = text;
-          output.appendChild(newLine);
-        }
-
-        function printHelp() {
-          printOutput("--help - Show this help message");
-          printOutput("Available commands:");
-          printOutput("about - Show about section");
-          printOutput("skills - Show skills section");
-          printOutput("portfolio - Show portfolio section");
-          printOutput("clear - Clear the terminal");
-        }
-
-        function clearTerminal() {
-          output.innerHTML = "";
-        }
-
-        function printPrompt() {
-          const prompt = document.createElement("div");
-          output.appendChild(prompt);
-        }
-
-        document.getElementById("trash-icon").addEventListener("click", () => {
-          Swal.fire({
-            title: "The Internet?",
-            text: "Sorry, it cannot be accessed at this time.",
-            icon: "question",
-          });
-        });
-
-        document
-          .getElementById("file-system-icon")
-          .addEventListener("click", () => {
-            Swal.fire({
-              title: "The Internet?",
-              text: "Sorry, it cannot be accessed at this time.",
-              icon: "question",
-            });
-          });
-
-        document.getElementById("home-icon").addEventListener("click", () => {
-          handleCommand("--help");
-        });
-      });
-    </script>
+    <script src="index.js"></script>
   </body>
 </html>
